@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.generated.TunerConstants;
 
 public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
@@ -36,6 +37,10 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("xSpeed", m_robotContainer.drivetrain.getState().Speeds.vxMetersPerSecond);
         SmartDashboard.putNumber("ySetSpeed", m_robotContainer.ySpeed);
         SmartDashboard.putNumber("ySpeed", m_robotContainer.drivetrain.getState().Speeds.vyMetersPerSecond);
+        SmartDashboard.putNumber("KP", TunerConstants.KP);
+        SmartDashboard.putNumber("KD", TunerConstants.KD);
+        SmartDashboard.putNumber("KI", TunerConstants.KI);
+
     }
     //PUSH TEST
     //another test
@@ -74,9 +79,13 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         m_robotContainer.setSpeed();
+        TunerConstants.KP = SmartDashboard.getNumber("KP", 0.48);
+        TunerConstants.KI = SmartDashboard.getNumber("KI", 0.01);
+        TunerConstants.KD = SmartDashboard.getNumber("KD", 0);
     }
 
     @Override
+
     public void teleopExit() {}
 
     @Override
