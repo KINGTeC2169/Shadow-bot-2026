@@ -22,7 +22,7 @@ import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.Constants;
 
 public class RobotContainer {
-    private double speed = 0.5;
+    private double speed = SmartDashboard.getNumber("Swerve Speed", 0.5);
     private double MaxSpeed =  TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     private double MaxAngularRate =  RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
 
@@ -40,8 +40,16 @@ public class RobotContainer {
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
     public RobotContainer() {
+
         SmartDashboard.putNumber("Swerve Speed", speed);
+        
+        
+        
         configureBindings();
+    }
+
+    public void setSpeed(){
+        speed = SmartDashboard.getNumber("Swerve Speed", 0.5);
     }
 
     private void configureBindings() {
@@ -52,7 +60,7 @@ public class RobotContainer {
             drivetrain.applyRequest(() ->
                 drive.withVelocityX(-joystick.getLeftY() * MaxSpeed * speed) // Drive forward with negative Y (forward)
                     .withVelocityY(-joystick.getLeftX() * MaxSpeed * speed) // Drive left with negative X (left)
-                    .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
+                    .withRotationalRate(-joystick.getRightX() * MaxAngularRate*speed) // Drive counterclockwise with negative X (left)
                     //took out negative
             )
         );
