@@ -21,9 +21,9 @@ import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.Constants;
 
-public class RobotContainer {
-    private double speed = SmartDashboard.getNumber("Swerve Speed", 0.5);
-    private double MaxSpeed =  TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
+public class RobotContainer { //made a bunch of privates public to put in periodics
+    public double speed = SmartDashboard.getNumber("Swerve Speed", 0.5);
+    public double MaxSpeed =  TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     private double MaxAngularRate =  RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
 
     /* Setting up bindings for necessary control of the swerve drive platform */
@@ -35,9 +35,12 @@ public class RobotContainer {
 
     private final Telemetry logger = new Telemetry(MaxSpeed);
 
-    private final CommandXboxController joystick = new CommandXboxController(Constants.Ports.controller);
+    public final CommandXboxController joystick = new CommandXboxController(Constants.Ports.controller);
 
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
+
+    public double xSpeed =  -joystick.getLeftY() * MaxSpeed * speed;
+    public double ySpeed = -joystick.getLeftX() * MaxSpeed * speed;
 
     public RobotContainer() {
 
@@ -58,8 +61,8 @@ public class RobotContainer {
         drivetrain.setDefaultCommand(
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
-                drive.withVelocityX(-joystick.getLeftY() * MaxSpeed * speed) // Drive forward with negative Y (forward)
-                    .withVelocityY(-joystick.getLeftX() * MaxSpeed * speed) // Drive left with negative X (left)
+                drive.withVelocityX(xSpeed) // Drive forward with negative Y (forward)
+                    .withVelocityY(ySpeed) // Drive left with negative X (left)
                     .withRotationalRate(-joystick.getRightX() * MaxAngularRate*speed) // Drive counterclockwise with negative X (left)
                     //took out negative
             )

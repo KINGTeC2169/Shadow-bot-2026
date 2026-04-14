@@ -7,6 +7,7 @@ package frc.robot;
 import com.ctre.phoenix6.HootAutoReplay;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -28,6 +29,13 @@ public class Robot extends TimedRobot {
     public void robotPeriodic() {
         m_timeAndJoystickReplay.update();
         CommandScheduler.getInstance().run(); 
+
+        m_robotContainer.xSpeed = -m_robotContainer.joystick.getLeftY() * m_robotContainer.MaxSpeed * m_robotContainer.speed;
+        m_robotContainer.ySpeed= -m_robotContainer.joystick.getLeftX() * m_robotContainer.MaxSpeed * m_robotContainer.speed;
+        SmartDashboard.putNumber("xSetSpeed", m_robotContainer.xSpeed);
+        SmartDashboard.putNumber("xSpeed", m_robotContainer.drivetrain.getState().Speeds.vxMetersPerSecond);
+        SmartDashboard.putNumber("ySetSpeed", m_robotContainer.ySpeed);
+        SmartDashboard.putNumber("ySpeed", m_robotContainer.drivetrain.getState().Speeds.vyMetersPerSecond);
     }
     //PUSH TEST
     //another test
