@@ -21,24 +21,25 @@ import frc.robot.subsystems.CommandSwerveDrivetrain;
 public class TunerConstants {
     // Both sets of gains need to be tuned to your individual robot.
 
+    public static double KP = SmartDashboard.getNumber("KP",100);
+    public static double KI = SmartDashboard.getNumber("KI", 0);
+    public static double KD = SmartDashboard.getNumber("KD", 0.5);
+    
     // The steer motor uses any SwerveModule.SteerRequestType control request with the
     // output type specified by SwerveModuleConstants.SteerMotorClosedLoopOutput
     private static final Slot0Configs steerGains = new Slot0Configs()
-        .withKP(100).withKI(0).withKD(0.5)
+        .withKP(KP).withKI(KI).withKD(KD) //KP wa 100?
         .withKS(0.1).withKV(2.66).withKA(0)
         .withStaticFeedforwardSign(StaticFeedforwardSignValue.UseClosedLoopSign);
     // When using closed-loop control, the drive motor uses the control
     // output type specified by SwerveModuleConstants.DriveMotorClosedLoopOutput
     
     
-    public static double KP = SmartDashboard.getNumber("KP", 0.1);
-    public static double KI = SmartDashboard.getNumber("KI", 0);
-    public static double KD = SmartDashboard.getNumber("KD", 0);
-    
+   
     
 
     private static Slot0Configs driveGains = new Slot0Configs() //was final
-        .withKP(KP).withKI(KI).withKD(KD)  
+        .withKP(0.48).withKI(0.01).withKD(0)  
 
         .withKS(0).withKV(0.124);
 

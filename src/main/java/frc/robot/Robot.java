@@ -79,9 +79,9 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         m_robotContainer.setSpeed();
-        TunerConstants.KP = SmartDashboard.getNumber("KP", 0.48);
-        TunerConstants.KI = SmartDashboard.getNumber("KI", 0.01);
-        TunerConstants.KD = SmartDashboard.getNumber("KD", 0);
+        TunerConstants.KP = SmartDashboard.getNumber("KP", 100);
+        TunerConstants.KI = SmartDashboard.getNumber("KI", 0);
+        TunerConstants.KD = SmartDashboard.getNumber("KD", 0.5);
     }
 
     @Override
