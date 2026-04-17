@@ -21,9 +21,9 @@ import frc.robot.subsystems.CommandSwerveDrivetrain;
 public class TunerConstants {
     // Both sets of gains need to be tuned to your individual robot.
 
-    public static double KP = SmartDashboard.getNumber("KP",100);
+    public static double KP = 8;
     public static double KI = SmartDashboard.getNumber("KI", 0);
-    public static double KD = SmartDashboard.getNumber("KD", 0.5);
+    public static double KD = SmartDashboard.getNumber("KD", 0);
     
     // The steer motor uses any SwerveModule.SteerRequestType control request with the
     // output type specified by SwerveModuleConstants.SteerMotorClosedLoopOutput

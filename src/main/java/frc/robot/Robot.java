@@ -5,6 +5,7 @@
 package frc.robot;
 
 import com.ctre.phoenix6.HootAutoReplay;
+import com.ctre.phoenix6.SignalLogger;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,6 +25,9 @@ public class Robot extends TimedRobot {
 
     public Robot() {
         m_robotContainer = new RobotContainer();
+        SignalLogger.setPath("/u/logs");
+        SignalLogger.start();
+        
     }
 
     @Override
@@ -40,7 +44,7 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("KP", TunerConstants.KP);
         SmartDashboard.putNumber("KD", TunerConstants.KD);
         SmartDashboard.putNumber("KI", TunerConstants.KI);
-
+       
     }
     //PUSH TEST
     //another test
@@ -79,9 +83,9 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         m_robotContainer.setSpeed();
-        TunerConstants.KP = SmartDashboard.getNumber("KP", 100);
+        TunerConstants.KP = SmartDashboard.getNumber("KP",8);
         TunerConstants.KI = SmartDashboard.getNumber("KI", 0);
-        TunerConstants.KD = SmartDashboard.getNumber("KD", 0.5);
+        TunerConstants.KD = SmartDashboard.getNumber("KD", 0);
     }
 
     @Override
